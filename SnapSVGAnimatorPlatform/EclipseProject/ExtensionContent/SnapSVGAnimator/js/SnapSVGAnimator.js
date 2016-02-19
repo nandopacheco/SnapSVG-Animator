@@ -1504,7 +1504,7 @@ ResourceManager.prototype.getText = function(id) {
  * initialize animation component
  *
  */
-function SVGAnim(data, w, h, fps, params) {
+function SVGAnim(data, w, h, fps, params, element) {
     var instance = this,
         timeline,
         autoplay,
@@ -1528,7 +1528,11 @@ function SVGAnim(data, w, h, fps, params) {
     instance.resourceManager = new ResourceManager(data);
 
     //TODO:: RENDERER
-    instance.s = new Snap(w, h);
+    if (element) {
+        instance.s = new Snap(element);
+    } else {
+        instance.s = new Snap(w, h);
+    }   
     id = instance.s.id;
     instance.s.attr('id', id);
     instance.s.attr('viewBox', "0 0 " + w + " " + h);
